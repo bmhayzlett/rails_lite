@@ -1,4 +1,5 @@
 require 'json'
+require 'byebug'
 
 class Session
   # find the cookie for this app
@@ -23,7 +24,6 @@ class Session
   # serialize the hash into json and save in a cookie
   # add to the responses cookies
   def store_session(res)
-    res['_rails_lite_app'] = @deserialized_cookie.to_json
-    puts res['_rails_lite_app']
+    res.set_cookie('_rails_lite_app',{path: "/", value: @deserialized_cookie.to_json})
   end
 end
